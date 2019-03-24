@@ -7,5 +7,5 @@ add_subdirectory(lib/googletest-master)
 include_directories(lib/googletest-master/googletest/include)
 include_directories(lib/googletest-master/googlemock/include)
 
-add_executable(lab2 main.cpp  Map.h List.h Test/test.cpp)
+add_executable(lab2 main.cpp  Map.h List.h )
 target_link_libraries(lab2 gtest gtest_main)

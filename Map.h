@@ -330,7 +330,6 @@ typename RB_Tree<T>::Node* RB_Tree<T>::Find(size_t key){
        else
            node = node->right;
     }
-    if (!node)
     return node;
 }
 

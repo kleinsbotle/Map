@@ -4,11 +4,14 @@
 #include "Map.h"
 int main(int argc, char* argv[]){
     testing::InitGoogleTest(&argc, argv);
- //   int n = RUN_ALL_TESTS();
+    int n = RUN_ALL_TESTS();
+
     RB_Tree<char> map;
     List<size_t>* keys;
     List<char>* values;
-    map.Insert('a', 10);
+
+
+    map.Insert('a', 10);    //work example
     map.Insert('c', 4);
     map.Insert('b', 11);
     map.Insert('d', 12);

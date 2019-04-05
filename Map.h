@@ -44,8 +44,8 @@ private:
 
     };
 
-    List<size_t> keys;
-    List<T> values;
+   /* List<size_t> keys;
+    List<T> values;*/
 
 
     Node* root;
@@ -60,8 +60,8 @@ private:
     void __balance(Node* node);
     void __delete_balance(Node* node);
     void delete_tree(Node* node);
-    void inorder_walk_key(Node* node);       //add all the keys in the list of keys in descending order
-    void inorder_walk_value(Node* node);     //add al the values in the list of values (in key descending order)
+    void inorder_walk_key(Node* node, List<size_t> *keys);       //add all the keys in the list of keys in descending order
+    void inorder_walk_value(Node* node, List<T> *values);     //add al the values in the list of values (in key descending order)
     RB_Tree<T>::Node* __next_node(Node* node);
     RB_Tree<T>::Node* __find(size_t key);
 
@@ -96,8 +96,6 @@ RB_Tree<T>::RB_Tree(){
 template <typename T>
 RB_Tree<T>::~RB_Tree(){
     delete_tree(root);
-    keys.clear();
-    values.clear();
     root = nullptr;
     size = 0;
     for (int i = 0; i < maxrow; i++)
@@ -307,14 +305,16 @@ void RB_Tree<T>::__balance(Node* node){
 
 template <typename T>
 List<size_t>* RB_Tree<T>::GetKeys(){
-    inorder_walk_key(root);
-    return &keys;
+    List<size_t> *keys = new List<size_t>;
+    inorder_walk_key(root, keys);
+    return keys;
 }
 
 template <typename T>
 List<T>* RB_Tree<T>::GetValues(){
-    inorder_walk_value(root);
-    return &values;
+    List<T> *values = new List<T>;
+    inorder_walk_value(root, values);
+    return values;
 }
 
 template <typename T>
@@ -469,20 +469,20 @@ void RB_Tree<T>::Remove(size_t key){
 }
 
 template <typename T>
-void RB_Tree<T>::inorder_walk_key(Node* node){
+void RB_Tree<T>::inorder_walk_key(Node* node, List<size_t> *keys){
     if (node){
-        inorder_walk_key(node->left);
-        keys.push_back(node->key);
-        inorder_walk_key(node->right);
+        inorder_walk_key(node->left, keys);
+        keys->push_back(node->key);
+        inorder_walk_key(node->right, keys);
     }
 }
 
 template <typename T>
-void RB_Tree<T>::inorder_walk_value(Node* node){
+void RB_Tree<T>::inorder_walk_value(Node* node, List<T> *values){
     if (node){
-        inorder_walk_value(node->left);
-        values.push_back(node->data);
-        inorder_walk_value(node->right);
+        inorder_walk_value(node->left, values);
+        values->push_back(node->data);
+        inorder_walk_value(node->right, values);
     }
 }
 

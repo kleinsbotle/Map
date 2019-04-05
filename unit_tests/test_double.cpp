@@ -148,3 +148,18 @@ TEST_F(MapTest_d, GetKeys_Empty){
 TEST_F(MapTest_d, GetValues_Empty){
     EXPECT_EQ(map->GetValues()->get_size(), 0);
 }
+
+TEST_F(MapTest_d, Clear){
+    map->Insert(1.123, 1);
+    map->Insert(2.123, 2);
+    map->Insert(3.123, 3);
+    map->Insert(4.123, 4);
+    map->Insert(5.123, 5);
+    map->ClearMap();
+    try{
+        map->Remove(1);
+    }
+    catch(std::invalid_argument &err){
+        EXPECT_THAT(std::string(err.what()), Eq("\nThere is no element with that key\n"));
+    }
+}

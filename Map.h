@@ -79,6 +79,7 @@ public:
     List<T>* GetValues();
     T Find(size_t key);
     void Remove(size_t key);
+    void ClearMap();
 
 };
 
@@ -95,12 +96,7 @@ RB_Tree<T>::RB_Tree(){
 
 template <typename T>
 RB_Tree<T>::~RB_Tree(){
-    delete_tree(root);
-    root = nullptr;
-    size = 0;
-    for (int i = 0; i < maxrow; i++)
-        delete SCREEN[i];
-    delete SCREEN;
+    ClearMap();
 }
 
 template <typename T>
@@ -484,6 +480,16 @@ void RB_Tree<T>::inorder_walk_value(Node* node, List<T> *values){
         values->push_back(node->data);
         inorder_walk_value(node->right, values);
     }
+}
+
+template <typename T>
+void RB_Tree<T>::ClearMap(){
+    delete_tree(root);
+    root = nullptr;
+    size = 0;
+    for (int i = 0; i < maxrow; i++)
+        delete SCREEN[i];
+    delete SCREEN;
 }
 
 

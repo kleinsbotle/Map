@@ -13,7 +13,7 @@
 
 
 
-#define maxrow 7
+#define maxrow 7           //constants're being used to print the tree
 #define matrix_size 80
 #define offset 40
 
@@ -62,7 +62,7 @@ private:
     void delete_tree(Node* node);
     void inorder_walk_key(Node* node);       //add all the keys in the list of keys in descending order
     void inorder_walk_value(Node* node);     //add al the values in the list of values (in key descending order)
-    RB_Tree<T>::Node* next_node(Node* node);
+    RB_Tree<T>::Node* __next_node(Node* node);
     RB_Tree<T>::Node* __find(size_t key);
 
 
@@ -348,7 +348,7 @@ T RB_Tree<T>::Find(size_t key){
 
 
 template <typename T>
-typename RB_Tree<T>::Node* RB_Tree<T>::next_node(Node* node){  //Function returns the next element (search by key)
+typename RB_Tree<T>::Node* RB_Tree<T>::__next_node(Node* node){  //Function returns the next element (search by key)
     if (node->right){
        node = node->right;
        while (node->left)
@@ -437,7 +437,7 @@ void RB_Tree<T>::Remove(size_t key){
     if ((!node->left) || (!node->right))
         d_node = node;
     else                            //if the deleted element has two children
-        d_node = next_node(node);     //we need to find the next element (search by key)
+        d_node = __next_node(node);     //we need to find the next element (search by key)
 
     if (d_node->left)
         child = d_node->left;

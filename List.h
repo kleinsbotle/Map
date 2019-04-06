@@ -284,7 +284,6 @@ void List<Data>::clear(){
     }
     else if (size == 1){
         delete head;
-        delete tail;
         __empty_list();
     }
     else{
